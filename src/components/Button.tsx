@@ -1,47 +1,25 @@
-import { styled } from '../theme'
-import { color } from '../util'
+import { Box } from '.'
+import styled from 'styled-components'
 
-export const Button = styled('button', {
-  padding: '$3 $5',
+// This should maybe be a subclass of the Link element once we get that done
+// Maybe even just make this a variant
+export const Button = styled(Box).attrs(props => ({
+  as: 'button',
+  px: '1.5rem',
+  py: '0.75rem',
+  ...props,
+}))`
+  color: ${props => props.theme.colors.foreground};
+  background: transparent;
 
-  color: color('$fg'),
-  background: 'transparent',
+  border: 1px solid currentColor;
+  border-radius: 1rem;
 
-  border: '1px solid ' + color('$fg'),
-  borderRadius: '$2',
-
-  cursor: 'pointer',
-
-  willChange: 'color, background',
-  transition: '$fast',
-  '&:hover': {
-    color: color('$bg'),
-    background: color('$fg'),
-  },
-
-  variants: {
-    color: {
-      normal: {
-        $$fg: '$colors$foreground',
-        $$bg: '$colors$background',
-      },
-      reverse: {
-        $$fg: '$colors$background',
-        $$bg: '$colors$foreground',
-      },
-      accent: {
-        $$fg: '$colors$background',
-        $$bg: '$colors$foreground',
-        '&:hover': {
-          color: color('$fg'),
-          background: color('blue100'),
-          borderColor: color('blue100'),
-        },
-      },
-    },
-  },
-
-  defaultVariants: {
-    color: 'normal',
-  },
-})
+  cursor: pointer;
+  will-change: color, background;
+  transition: ${props => props.theme.transitions.fast};
+  &:hover {
+    color: ${props => props.theme.colors.background};
+    background: ${props => props.theme.colors.foreground};
+  }
+`

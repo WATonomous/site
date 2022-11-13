@@ -1,40 +1,33 @@
-import { styled } from '../theme'
+import { Box } from '.'
+import type { BoxProps } from '.'
+import styled from 'styled-components'
 
-export const Container = styled('div', {
-  px: '$8',
+interface ContainerProps extends BoxProps {
+  sizeSm: number
+  sizeMd: number
+  sizeLg: number
+}
 
-  variants: {
-    size: {
-      '1': {
-        maxWidth: '430px',
-      },
-      '2': {
-        maxWidth: '715px',
-      },
-      '3': {
-        maxWidth: '1145px',
-      },
-      '4': {
-        maxWidth: 'none',
-      },
-    },
-    align: {
-      left: {
-        ml: 0,
-        mr: 'auto',
-      },
-      center: {
-        mx: 'auto',
-      },
-      right: {
-        ml: 'auto',
-        mr: 0,
-      },
-    },
-  },
+const defaultProps: ContainerProps = {
+  mx: 'auto',
+  sizeSm: 90,
+  sizeMd: 80,
+  sizeLg: 60,
+} as const
 
-  defaultVariants: {
-    size: '4',
-    align: 'left',
-  },
-})
+export const Container = styled(Box).attrs(props => ({
+  ...defaultProps,
+  ...props,
+}))<ContainerProps>`
+  max-width: ${props => props.sizeLg}vw;
+
+  ${props => props.theme.breakpoints.large} {
+    max-width: ${props => props.sizeMd}vw;
+  }
+
+  ${props => props.theme.breakpoints.medium} {
+    max-width: ${props => props.sizeSm}vw;
+  }
+`
+
+Container.defaultProps = defaultProps

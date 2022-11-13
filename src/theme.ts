@@ -1,80 +1,58 @@
-import { createStitches } from '@stitches/react'
+import _styled, { AnyStyledComponent, StyledComponent } from 'styled-components'
 
-function setAllFactory(...properties) {
-  return (val) => Object.fromEntries(properties.map((prop) => [prop, val]))
-}
+import type { MakePartial } from './util'
 
-export const config = {
-  theme: {
-    fonts: {
-      heading: 'Epilogue, Inter',
-      subheading: 'Inter',
-      paragraph: 'Inter',
-    },
-    fontSizes: {
-      1: '0.5rem',
-      2: '0.75rem',
-      3: '1rem',
-      4: '1.25rem',
-      5: '1.5rem',
-      6: '2rem',
-    },
-    space: {
-      1: '0.25rem',
-      2: '0.5rem',
-      3: '0.9rem',
-      4: '1rem',
-      5: '1.5rem',
-      6: '2rem',
-      7: '3rem',
-      8: '5rem',
-      9: '7.5rem',
-    },
-    sizes: {
-      1: '1rem',
-      2: '1.5rem',
-      3: '3rem',
-    },
-    transitions: {
-      slow: '0.3s ease-in-out',
-      normal: '0.1s ease-in-out',
-      fast: '0.075s ease-in-out',
-    },
-    colors: {
-      white100: '255, 255, 255',
+// TODO TS autosuggest
+export const theme = {
+  colors: {
+    white100: 'rgb(255, 255, 255)',
+    white200: 'rgb(237, 237, 237)',
 
-      white200: '237, 237, 237',
-      black100: '0, 0, 0',
-      black200: '24, 24, 24',
+    black100: 'rgb(0, 0, 0)',
+    black200: 'rgb(24, 24, 24)',
 
-      blue100: '66, 135, 245',
-      blue200: '48, 113, 217',
+    blue100: 'rgb(66, 135, 245)',
+    blue200: 'rgb(48, 113, 217)',
 
-      foreground: '$black100',
-      background: '$white100',
+    // redo this
+    gradient: 'linear-gradient(30deg, $blue100, $blue200)',
 
-      gradient: 'linear-gradient(30deg, $blue100, $blue200)',
+    get foreground() {
+      return this.white100
     },
-    radii: {
-      1: '0.5rem',
-      2: '1rem',
-      3: '4rem',
+
+    get background() {
+      return this.black100
     },
   },
 
-  utils: {
-    pl: setAllFactory('paddingLeft'),
-    pr: setAllFactory('paddingRight'),
-    pt: setAllFactory('paddingTop'),
-    pb: setAllFactory('paddingBottom'),
-    px: setAllFactory('pl', 'pr'),
-    py: setAllFactory('pt', 'pb'),
-    p: setAllFactory('px', 'py'),
+  transitions: {
+    slow: '0.3s ease-in-out',
+    normal: '0.1s ease-in-out',
+    fast: '0.075s ease-in-out',
+  },
 
-    ml: setAllFactory('marginLeft'),
-    mr: setAllFactory('marginRight'),
-    mx: setAllFactory('ml', 'mr'),
+  breakpoints: {
+    medium: '@media (max-width: 768px)',
+    large: '@media (max-width: 1024px)',
   },
 } as const
 
-export const { styled, createTheme } = createStitches(config)
+// export function styled<P extends object>(
+//   el: AnyStyledComponent,
+//   defaultProps: Partial<P> = {}
+// ): StyledComponent<typeof el, typeof theme, P, keyof typeof defaultProps> {
+//   const styleFunction = _styled(el)
+
+//   // Could also implement dot syntax with get()
+//   return new Proxy(styleFunction, {
+//     apply(target, thisArg, args) {
+//       const component = target<MakePartial<P, keyof typeof defaultProps>>(
+//         args[0],
+//         ...args.slice(1)
+//       )
+//       component.defaultProps = defaultProps
+//       return component
+//     },
+//   })
+// }

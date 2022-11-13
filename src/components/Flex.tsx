@@ -1,91 +1,47 @@
-import { styled } from '../theme'
+import styled, { CSSProperties } from 'styled-components'
+
 import { Box } from '.'
+import type { BoxProps } from '.'
 
-export const Flex = styled('div', {
-  position: 'relative',
-  display: 'flex',
+interface FlexProps extends BoxProps {
+  justify: CSSProperties['justifyContent']
+  align: CSSProperties['alignItems']
+  wrap: CSSProperties['flexWrap']
+}
 
-  variants: {
-    justify: {
-      start: {
-        justifyContent: 'flex-start',
-      },
-      center: {
-        justifyContent: 'center',
-      },
-      end: {
-        justifyContent: 'flex-end',
-      },
-      between: {
-        justifyContent: 'space-between',
-      },
-    },
-    align: {
-      start: {
-        alignItems: 'flex-start',
-      },
-      center: {
-        alignItems: 'center',
-      },
-      end: {
-        alignItems: 'flex-end',
-      },
-      stretch: {
-        alignItems: 'stretch',
-      },
-      baseline: {
-        alignItems: 'baseline',
-      },
-    },
-    wrap: {
-      noWrap: {
-        flexWrap: 'nowrap',
-      },
-      wrap: {
-        flexWrap: 'wrap',
-      },
-      wrapReverse: {
-        flexWrap: 'wrap-reverse',
-      },
-    },
-    gap: {
-      1: {
-        gap: '$1',
-      },
-      2: {
-        gap: '$3',
-      },
-      3: {
-        gap: '$5',
-      },
-      4: {
-        gap: '$7',
-      },
-      5: {
-        gap: '$8',
-      },
-      6: {
-        gap: '$9',
-      },
-    },
-  },
+// TODO maybe find a better way to do this with less boilerplate
+const defaultProps: FlexProps = {
+  align: 'stretch',
+  justify: 'start',
+  wrap: 'wrap',
+} as const
 
-  defaultVariants: {
-    align: 'stretch',
-    justify: 'start',
-    wrap: 'wrap',
-    gap: 2,
-  },
-})
+export const Flex = styled(Box).attrs(props => ({
+  ...defaultProps,
+  ...props,
+}))<FlexProps>`
+  position: relative;
 
-export const Row = styled(Flex, {
-  flexDirection: 'row',
-})
+  display: flex;
+  justify-content: ${props => props.justify};
+  align-items: ${props => props.align};
+  flex-wrap: ${props => props.wrap};
+`
 
-export const Col = styled(Flex, {
-  flexDirection: 'column',
-})
+Flex.defaultProps = defaultProps
 
-export const Cell = styled(Box, {
-  flex: 1,
-})
+export const Row = styled(Flex)`
+  flex-direction: 'row';
+`
+
+export const Col = styled(Flex)`
+  flex-direction: 'col';
+`
+
+// Can't use gap because its caniuse % isn't high enough.
+export const Spacer = styled.div`
+  flex: 1;
+  align-self: stretch;
+  justify-self: stretch;
+  min-width: 1rem;
+`

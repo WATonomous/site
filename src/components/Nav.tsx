@@ -1,104 +1,45 @@
-import React from 'react'
-import { styled } from '../theme'
-import { Row, Text, Box } from '.'
-import Link from 'next/link'
+import { Row, Spacer } from '.'
+
 import Image from 'next/future/image'
-import { color } from '../util'
-import logo from '../static/img/logos/wato.png'
+import Link from 'next/link'
+import React from 'react'
+import logo from '../static/img/logos/wato.webp'
+import styled from 'styled-components'
 
-const NavContainer = styled('header', {
-  position: 'fixed',
-  top: 0,
-  left: '50%',
-
-  width: '90vw',
-  px: '$9',
-  pb: '$1',
-  height: 'var(--navbar-height)',
-  borderBottomLeftRadius: '$2',
-  borderBottomRightRadius: '$2',
-  transform: 'translateX(-50%)',
-
-  zIndex: 999,
-
-  color: color('background'),
-  background: color('foreground', 0.75),
-  backdropFilter: 'blur(0.5rem)',
-
-  // Maybe make a Link component instead
-  a: {
-    transition: '$normal',
-    '&:hover': {
-      color: color('blue100'),
-    },
-  },
-})
+const BaseNav = styled.nav`
+  color: ${props => props.theme.colors.foreground};
+  background: transparent;
+`
 
 export function Nav() {
   return (
-    <NavContainer>
-      <Row
-        justify="center"
-        align="center"
-        wrap="noWrap"
-        gap={4}
-        css={{ height: '100%' }}
-      >
+    <>
+      <Row px="1rem" py="1rem">
         {/* Left */}
-        <Row as="nav" wrap="noWrap" gap={3}>
-          <Link passHref href="https://google.com/">
-            <Text as="a">Whatever</Text>
-          </Link>
-          <Link passHref href="https://google.com/">
-            <Text as="a">Whatever</Text>
-          </Link>
+        <Row>
+          <Link href="/about">ABOUT</Link>
+          <Spacer />
+          <Link href="/about">PROJECTS</Link>
+          <Spacer />
+          <Link href="/about">SPONSORS</Link>
+          <Spacer />
+          <Link href="/about">EVENTS</Link>
         </Row>
-
+        <Spacer />
         {/* Center */}
-        <Box css={{ alignSelf: 'stretch' }}>
-          <Link passHref href="/">
-            <Box
-              as="a"
-              css={{
-                position: 'relative',
-                display: 'block',
-                height: '100%',
-                py: '$3',
-              }}
-            >
-              <Image
-                alt="WATonomous Logo"
-                src={logo}
-                style={{
-                  height: '100%',
-                  width: 'auto',
-                }}
-              />
-              <Box
-                css={{
-                  position: 'absolute',
-                  top: '34.5%',
-                  left: '50.8%',
-                  borderRadius: '$3',
-                  width: '1.15rem',
-                  height: '1.15rem',
-                  background: color('blue100'),
-                }}
-              />
-            </Box>
-          </Link>
-        </Box>
-
+        <Row>
+          <Image alt="WATonomous Logo" src={logo} priority={true} width="240" />
+        </Row>
+        <Spacer />
         {/* Right */}
-        <Row as="nav" wrap="noWrap" gap={3}>
-          <Link passHref href="https://google.com/">
-            <Text as="a">Whatever</Text>
-          </Link>
-          <Link passHref href="https://google.com/">
-            <Text as="a">Whatever</Text>
-          </Link>
+        <Row>
+          <Link href="/about">GET INVOLVED</Link>
+          <Spacer />
+          <Link href="/about">NEWSROOM</Link>
+          <Spacer />
+          <Link href="/about">CONTACT US</Link>
         </Row>
       </Row>
-    </NavContainer>
+    </>
   )
 }

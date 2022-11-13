@@ -1,17 +1,7 @@
-import { CSSProperties } from 'react'
-import { config } from './theme'
+// Make some keys K of T optional.
+export type MakePartial<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 
-type ColorToken = keyof typeof config.theme.colors | `$${any}`
-
-export function color(token: ColorToken, alpha = 1) {
-  return `rgba($${token}, ${alpha})`
-}
-
-// Common styles. Maybe just use class helpers instead?
-export const cover = {
-  position: 'absolute' as CSSProperties['position'],
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
+// Convert a string in camelCase to arrow-case
+export function arrowify(str: string): string {
+  return str.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)
 }
