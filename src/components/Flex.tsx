@@ -4,6 +4,7 @@ import { Box } from '.'
 import type { BoxProps } from '.'
 
 interface FlexProps extends BoxProps {
+  direction?: CSSProperties['flexDirection']
   justify: CSSProperties['justifyContent']
   align: CSSProperties['alignItems']
   wrap: CSSProperties['flexWrap']
@@ -23,6 +24,7 @@ export const Flex = styled(Box).attrs(props => ({
   position: relative;
 
   display: flex;
+  flex-direction: ${props => props.direction};
   justify-content: ${props => props.justify};
   align-items: ${props => props.align};
   flex-wrap: ${props => props.wrap};
@@ -30,13 +32,34 @@ export const Flex = styled(Box).attrs(props => ({
 
 Flex.defaultProps = defaultProps
 
-export const Row = styled(Flex)`
-  flex-direction: 'row';
-`
+export function Row({ children, ...props }) {
+  return (
+    <Flex {...props} direction="row">
+      {children}
+    </Flex>
+  )
+}
 
-export const Col = styled(Flex)`
-  flex-direction: 'col';
-`
+export function ResponsiveRow({ children, ...props }) {
+  return (
+    <Flex
+      {...props}
+      wrap="nowrap"
+      direction="row"
+      mobile$flexDirection="column"
+    >
+      {children}
+    </Flex>
+  )
+}
+
+export function Col({ children, ...props }) {
+  return (
+    <Flex {...props} direction="column">
+      {children}
+    </Flex>
+  )
+}
 
 // Can't use gap because its caniuse % isn't high enough.
 export const Spacer = styled.div`
@@ -44,4 +67,8 @@ export const Spacer = styled.div`
   align-self: stretch;
   justify-self: stretch;
   min-width: 1rem;
+
+  ${props => props.theme.breakpoints.mobile} {
+    min-height: 1rem;
+  }
 `

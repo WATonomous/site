@@ -1,11 +1,14 @@
 import '../styles/base.scss'
 
+import { Footer, Nav } from '../components'
+
 import Head from 'next/head'
-import { Nav } from '../components'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { arrowify } from '../util'
 import { theme } from '../theme'
+
+// createGlobalStyle?
 
 // Generate CSS variables from theme
 const variables = `
@@ -29,6 +32,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Nav />
       <Component {...pageProps} />
+      <Footer />
     </ThemeProvider>
   )
 }

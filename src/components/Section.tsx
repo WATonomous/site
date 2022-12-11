@@ -7,5 +7,5 @@ export const Section = styled(Box).attrs(props => ({
   ...props,
 }))`
   position: relative;
-  width: 100vw;
+  width: 100%;
 `

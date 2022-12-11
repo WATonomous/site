@@ -1,11 +1,16 @@
-.cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+.shadow {
+  text-shadow: 0.1rem 0.1rem var(--background);
+}
+
+.box-shadow {
+  box-shadow: 0 0 1rem 0 var(--background);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(359deg);
+  }
 }

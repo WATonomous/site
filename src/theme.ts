@@ -1,21 +1,18 @@
 import _styled, { AnyStyledComponent, StyledComponent } from 'styled-components'
 
-import type { MakePartial } from './util'
+import { transparentize } from './util'
 
 // TODO TS autosuggest
 export const theme = {
   colors: {
-    white100: 'rgb(255, 255, 255)',
-    white200: 'rgb(237, 237, 237)',
+    white100: 'rgb(255 255 255)',
+    white200: 'rgb(237 237 237)',
 
-    black100: 'rgb(0, 0, 0)',
-    black200: 'rgb(24, 24, 24)',
+    black100: 'rgb(0 0 0)',
+    black200: 'rgb(24 24 24)',
 
-    blue100: 'rgb(66, 135, 245)',
-    blue200: 'rgb(48, 113, 217)',
-
-    // redo this
-    gradient: 'linear-gradient(30deg, $blue100, $blue200)',
+    blue100: 'rgb(67 131 255)',
+    blue200: 'rgb(37 78 160)',
 
     get foreground() {
       return this.white100
@@ -23,6 +20,10 @@ export const theme = {
 
     get background() {
       return this.black100
+    },
+
+    get semiBackground() {
+      return transparentize(this.background, 0.5)
     },
   },
 
@@ -33,8 +34,8 @@ export const theme = {
   },
 
   breakpoints: {
-    medium: '@media (max-width: 768px)',
-    large: '@media (max-width: 1024px)',
+    small: '@media (max-width: 768px)',
+    medium: '@media (max-width: 1024px)',
   },
 } as const
 

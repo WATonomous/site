@@ -1,13 +1,59 @@
-import type { PropsWithChildren, ReactElement } from 'react'
-import React, { useCallback, useState } from 'react'
+import styled, { css } from 'styled-components'
 
-import styled from 'styled-components'
+import { CSSProperties } from 'react'
+import { arrowify } from '../util'
+
+const unchangedProps = [
+  'position',
+  'top',
+  'left',
+  'right',
+  'bottom',
+  'zIndex',
+
+  'opacity',
+  'textAlign',
+  'flexDirection',
+
+  'border',
+  'borderTop',
+  'borderLeft',
+  'borderRight',
+  'borderBottom',
+
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
+
+  'transition',
+  'transform',
+  'animation',
+  'animationDirection',
+  'animationPlayState',
+
+  'userSelect',
+  'pointerEvents',
+] as const
+
+type UnchangedBoxProps = {
+  [key in typeof unchangedProps[number]]?: CSSProperties[key]
+}
+
+// Need to add important since every rule comes after box, overriding the specificity
+const MOBILE_PREFIX = 'mobile$'
+function buildMobileProp([prop, val]: [string, string]) {
+  return arrowify(prop.slice(MOBILE_PREFIX.length)) + ':' + val + '!important;'
+}
+
+const TABLET_PREFIX = 'tablet$'
+function buildTabletProp([prop, val]: [string, string]) {
+  return arrowify(prop.slice(TABLET_PREFIX.length)) + ':' + val + '!important;'
+}
 
 // TODO add theme typings
-export interface BoxProps {
-  // Temp fixes until I open a PR to @typed/styled-components
-  // as?: ElementType
-
+// TODO change these to CSSProperties['...']
+export interface BoxProps extends UnchangedBoxProps {
   // Margins
   mx?: string
   my?: string
@@ -29,11 +75,20 @@ export interface BoxProps {
   h?: string
   mw?: string
   mh?: string
+
+  bg?: string
+  radius?: CSSProperties['borderRadius']
+  fit?: CSSProperties['objectFit']
+  textAlign?: CSSProperties['textAlign']
+
+  // All mobile props. See if this can be properly typechecked
+  [key: `${typeof MOBILE_PREFIX}${string}`]: any
+
+  // All tablet props. See if this can be properly typechecked
+  [key: `${typeof TABLET_PREFIX}${string}`]: any
 }
 
-// Extend this for all components. Use `as` prop if another element is needed.
-// Allows us to quickly set CSS props like margin and padding.
-export const Box = styled.div<BoxProps>`
+export const boxStyles = css<BoxProps>`
   margin-top: ${props => props.mt || props.my};
   margin-left: ${props => props.ml || props.mx};
   margin-right: ${props => props.mr || props.mx};
@@ -48,29 +103,37 @@ export const Box = styled.div<BoxProps>`
   height: ${props => props.h};
   max-width: ${props => props.mw};
   max-height: ${props => props.mh};
+
+  background: ${props =>
+    props.theme.colors[props.bg] ? `var(--${arrowify(props.bg)})` : props.bg};
+  border-radius: ${props => props.radius};
+  object-fit: ${props => props.fit};
+
+  /* Unchanged props */
+  ${props =>
+    unchangedProps
+      .filter(prop => typeof props[prop] !== 'undefined')
+      .map(prop => arrowify(prop) + ':' + props[prop] + ';')}
+
+  /* Tablet props */
+  ${props => props.theme.breakpoints.medium} {
+    ${props =>
+      Object.entries(props)
+        .filter(([prop, _]) => prop.startsWith(TABLET_PREFIX))
+        .map(buildTabletProp)}
+  }
+
+  /* Mobile props */
+  ${props => props.theme.breakpoints.small} {
+    ${props =>
+      Object.entries(props)
+        .filter(([prop, _]) => prop.startsWith(MOBILE_PREFIX))
+        .map(buildMobileProp)}
+  }
 `
 
-// Jank way of forwarding props to a child
-export function ForwardBox({
-  children,
-  ...props
-}: PropsWithChildren<BoxProps>) {
-  try {
-    const child = React.Children.only(children)
-
-    const [className, setClassName] = useState<string>()
-    const ref = useCallback((node: Element) => {
-      setClassName(node?.classList.toString())
-    }, [])
-    return (
-      <>
-        <Box ref={ref} style={{ display: 'none' }} {...props}></Box>
-        {React.cloneElement(child as ReactElement, { className })}
-      </>
-    )
-  } catch (err) {
-    console.warn(err)
-    console.warn(`ForwardBox expected only 1 child. Rendering children as-is.`)
-    return <>{children}</>
-  }
-}
+// Extend this for all components. Use `as` prop if another element is needed.
+// Allows us to quickly set CSS props like margin and padding.
+export const Box = styled.div<BoxProps>`
+  ${boxStyles}
+`

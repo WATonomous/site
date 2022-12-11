@@ -13,4 +13,9 @@ export const HStack = styled(Row)<StackProps>`
   }
 `
 
-// TODO VStack
+export const VStack = styled(Col)<StackProps>`
+  > :not(:first-child) {
+    margin: 0;
+    margin-top: ${props => props.gap};
+  }
+`
