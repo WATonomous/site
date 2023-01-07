@@ -9,38 +9,45 @@ const unchangedProps = [
   'left',
   'right',
   'bottom',
-  'zIndex',
+  'z-index',
+
+  'padding',
+  'margin',
 
   'opacity',
-  'textAlign',
-  'flexDirection',
+  'text-align',
+  'flex-direction',
 
   'border',
-  'borderTop',
-  'borderLeft',
-  'borderRight',
-  'borderBottom',
+  'border-top',
+  'border-left',
+  'border-right',
+  'border-bottom',
 
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderBottomLeftRadius',
-  'borderBottomRightRadius',
+  'border-top-left-radius',
+  'border-top-right-radius',
+  'border-bottom-left-radius',
+  'border-bottom-right-radius',
 
   'transition',
   'transform',
   'animation',
-  'animationDirection',
-  'animationPlayState',
+  'animation-direction',
+  'animation-play-state',
 
-  'userSelect',
-  'pointerEvents',
+  'user-select',
+  'pointer-events',
+
+  'word-break',
+  'font-size',
+  'display',
 ] as const
 
 type UnchangedBoxProps = {
-  [key in typeof unchangedProps[number]]?: CSSProperties[key]
+  [key in typeof unchangedProps[number]]?: any
 }
 
-// Need to add important since every rule comes after box, overriding the specificity
+// Need to add important since every other rule comes after box => has higher specificity
 const MOBILE_PREFIX = 'mobile$'
 function buildMobileProp([prop, val]: [string, string]) {
   return arrowify(prop.slice(MOBILE_PREFIX.length)) + ':' + val + '!important;'

@@ -10,16 +10,15 @@ export default function Home() {
       <Box
         as="nav"
         className="cover"
+        top="5%"
+        left="5%"
+        right="5%"
+        bottom="5%"
+        radius="2rem"
         style={{
           backgroundImage: `url(${bg.src})`,
           backgroundPositionY: '25%',
           filter: 'brightness(25%)', // TODO replace filter with an overlay element, since filter has low caniuse
-
-          top: '5%',
-          left: '5%',
-          right: '5%',
-          bottom: '5%',
-          borderRadius: '2rem',
         }}
       ></Box>
       <Container>

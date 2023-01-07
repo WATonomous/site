@@ -1,10 +1,10 @@
 import {
   Box,
   Container,
-  HStack,
   Image,
   Link,
   ResponsiveRow,
+  Row,
   Section,
   Spacer,
   VStack,
@@ -39,10 +39,28 @@ function Gear({ isInteractive = false, isReversed = false, ...props }) {
       src={gear}
       position="absolute"
       animation={isInteractive ? 'none' : animation}
-      userSelect="none"
-      pointerEvents="none"
+      user-select="none"
+      pointer-events="none"
       {...props}
     />
+  )
+}
+
+function EventCard({ title, date, children }) {
+  return (
+    <Box
+      padding="2rem"
+      bg="semiBackground"
+      radius="1rem"
+      word-break="break-all"
+      mw="100%"
+    >
+      <Box as="h2">{title}</Box>
+      <Box as="em">{date}</Box>
+      <Box as="p" pt="0.5rem">
+        {children}
+      </Box>
+    </Box>
   )
 }
 
@@ -116,14 +134,15 @@ export default function Home() {
           <Box as="h2" mt="1rem" className="shadow">
             University of Waterloo's Autonomous Vehicle Department
           </Box>
-          <HStack mt="1rem" gap="0.75rem">
+          <ResponsiveRow mt="1rem" justify="flex-start">
             <Link href="#" variant="button">
               Learn More
             </Link>
+            <Spacer mw="0.5rem" />
             <Link href="#" variant="button">
               Become a Sponsor
             </Link>
-          </HStack>
+          </ResponsiveRow>
         </Container>
       </Section>
 
@@ -132,8 +151,8 @@ export default function Home() {
       <Section
         id="about"
         px="20%"
-        tablet$paddingLeft="10%"
-        tablet$paddingRight="10%"
+        tablet$padding-left="10%"
+        tablet$padding-right="10%"
         mt="3rem"
       >
         {/* Background visuals */}
@@ -146,7 +165,7 @@ export default function Home() {
             mobile$left="5%"
             right="0"
             bottom="0"
-            borderTopLeftRadius="2rem"
+            border-top-left-radius="2rem"
           ></Box>
           <Box
             bg="blue100"
@@ -156,7 +175,7 @@ export default function Home() {
             mobile$left="5%"
             right="0"
             bottom="0"
-            borderTopLeftRadius="2rem"
+            border-top-left-radius="2rem"
           ></Box>
           {/* For that tiny curve on the left */}
           <Box
@@ -176,12 +195,12 @@ export default function Home() {
             right="70%"
             mobile$right="95%"
             bottom="0"
-            borderBottomRightRadius="2rem"
+            border-bottom-right-radius="2rem"
           ></Box>
         </>
         <VStack gap="4rem">
           <ResponsiveRow>
-            <VStack mw="45%" mobile$maxWidth="100%" gap="1rem" align="start">
+            <VStack mw="45%" mobile$max-width="100%" gap="1rem" align="start">
               <Box as="h1">OUR MISSION</Box>
               <Box as="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -195,13 +214,13 @@ export default function Home() {
                 Learn More
               </Link>
             </VStack>
-            <Spacer />
+            <Spacer minSize="1.5rem" />
             <Image
               radius="1rem"
               fit="cover"
               mw="50%"
-              mobile$maxWidth="100%"
-              mobile$marginTop="1.5rem"
+              mobile$max-width="100%"
+              mobile$margin-top="1.5rem"
               alt="Image of WATO car"
               src={bg}
               width="480"
@@ -212,16 +231,16 @@ export default function Home() {
               radius="1rem"
               fit="cover"
               mw="50%"
-              mobile$maxWidth="100%"
-              mobile$marginBottom="1.5rem"
+              mobile$max-width="100%"
+              mobile$margin-bottom="1.5rem"
               alt="Image of WATO car"
               src={bg}
               width="480"
             />
-            <Spacer />
-            <VStack mw="50%" mobile$maxWidth="100%" gap="1rem" align="end">
+            <Spacer minSize="1.5rem" />
+            <VStack mw="50%" mobile$max-width="100%" gap="1rem" align="end">
               <Box as="h1">PARTNERSHIPS</Box>
-              <Box as="p" textAlign="right">
+              <Box as="p" text-align="right">
                 Talk about merge between WATonomous and Watorace here (why we
                 are participating in the Indy Autonomous Challenge) and Mitt
                 Pitt rw? (mention briefly). Images could be clickable to
@@ -262,41 +281,36 @@ export default function Home() {
 
         <VStack px="15%" gap="2rem">
           <Box as="h1">UPCOMING EVENTS</Box>
-          <Box px="3rem" py="2rem" bg="semiBackground" radius="1rem">
-            <Box as="h2">5th Tech Talk</Box>
-            <Box as="em">Wed Jan 5, 2022 @ 7:00 PM</Box>
-            <Box as="p" pt="0.5rem">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-              <br />
-              <br />
-              <Box as="strong">Check it out! 🔥</Box>
-              https://www.youtube.com/watch?v=o-YBDTqX_ZU
-              <br />
-              <br />
-              Incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
-            </Box>
-          </Box>
-          <Box px="3rem" py="2rem" bg="semiBackground" radius="1rem">
-            <Box as="h2">Board Presentation</Box>
-            <Box as="em">Thurs Jan 6, 2022 @ 8:00 PM</Box>
-            <Box as="p" pt="0.5rem">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat...
-            </Box>
-          </Box>
+          <EventCard title="5th Tech Talk" date="Wed Jan 5, 2022 @ 7:00 PM">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+            <br />
+            <br />
+            <Box as="strong">Check it out! 🔥</Box>
+            https://www.youtube.com/watch?v=o-YBDTqX_ZU
+            <br />
+            <br />
+            Incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+          </EventCard>
+          <EventCard
+            title="Board Presentation"
+            date="Thurs Jan 6, 2022 @ 8:00 PM"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+            <br />
+            <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat...
+          </EventCard>
         </VStack>
       </Section>
 
@@ -310,14 +324,14 @@ export default function Home() {
             top="0"
             left="0"
             w="100%"
-            zIndex="-1"
+            z-index="-1"
           />
         </>
 
         <Box py="8rem" px="10%">
           <VStack gap="1rem">
             <Box as="h1">RESEARCH PROJECTS</Box>
-            <Box as="h4" mw="60%" mobile$maxWidth="100%">
+            <Box as="h4" mw="60%" mobile$max-width="100%">
               We are currently in the process of developing multiple research
               projects. They are all ongoing and will be ready by early fall.
               Check out the topics here!

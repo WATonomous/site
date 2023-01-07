@@ -14,8 +14,12 @@ import { theme } from '../theme'
 const variables = `
   :root {
     ${Object.entries(theme.colors)
-      .map(([k, v]) => `--${arrowify(k)}: ${v}`)
-      .join(';')}
+      .map(([k, v]) => `--${arrowify(k)}: ${v};`)
+      .join('')}
+
+    ${Object.entries(theme.transitions)
+      .map(([k, v]) => `--transition-${arrowify(k)}: ${v};`)
+      .join('')}
   }
 `
 
@@ -31,7 +35,9 @@ export default function App({ Component, pageProps }) {
         <style>{variables}</style>
       </Head>
       <Nav />
-      <Component {...pageProps} />
+      <main>
+        <Component {...pageProps} />
+      </main>
       <Footer />
     </ThemeProvider>
   )

@@ -46,7 +46,7 @@ export function ResponsiveRow({ children, ...props }) {
       {...props}
       wrap="nowrap"
       direction="row"
-      mobile$flexDirection="column"
+      mobile$flex-direction="column"
     >
       {children}
     </Flex>
@@ -62,13 +62,16 @@ export function Col({ children, ...props }) {
 }
 
 // Can't use gap because its caniuse % isn't high enough.
-export const Spacer = styled.div`
+export const Spacer = styled(Box).attrs(props => ({
+  minSize: '1rem',
+  ...props,
+}))`
   flex: 1;
   align-self: stretch;
   justify-self: stretch;
-  min-width: 1rem;
+  min-width: ${props => props.minSize};
 
   ${props => props.theme.breakpoints.mobile} {
-    min-height: 1rem;
+    min-height: ${props => props.minSize};
   }
 `
