@@ -43,10 +43,10 @@ export function Row({ children, ...props }) {
 export function ResponsiveRow({ children, ...props }) {
   return (
     <Flex
-      {...props}
       wrap="nowrap"
       direction="row"
       mobile$flex-direction="column"
+      {...props}
     >
       {children}
     </Flex>

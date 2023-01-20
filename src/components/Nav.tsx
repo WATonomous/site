@@ -16,9 +16,9 @@ const BaseNav = styled(Box).attrs(props => ({
   z-index: 999;
 
   transition: ${props => props.theme.transitions.slow};
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(2px);
 
-  box-shadow: 0 0rem 1rem 0 var(--background);
+  box-shadow: 0 0rem 1rem 0 ${props => props.theme.colors.background};
 `
 
 const BaseMobileNav = styled(Box).attrs(props => ({
@@ -27,10 +27,11 @@ const BaseMobileNav = styled(Box).attrs(props => ({
 }))<BoxProps>`
   position: fixed;
   top: 0;
+  left: -100vw;
   width: 100vw;
   height: 100vh;
   z-index: 999;
-  background: var(--background);
+  background: ${props => props.theme.colors.background};
   transition: ${props => props.theme.transitions.slow};
 `
 
@@ -41,41 +42,41 @@ interface NavItem {
 
 const leftNavItems: NavItem[] = [
   {
-    title: 'ABOUT',
+    title: 'About',
     link: '/#about',
   },
   {
-    title: 'PROJECTS',
+    title: 'Projects',
     link: '/#projects',
   },
   {
-    title: 'SPONSORS',
+    title: 'Sponsors',
     link: '/sponsors',
   },
   {
-    title: 'EVENTS',
+    title: 'Events',
     link: '/#events',
   },
 ]
 
 const rightNavItems: NavItem[] = [
   {
-    title: 'GET INVOLVED',
+    title: 'Get Involved',
     link: '/get-involved',
   },
   {
-    title: 'NEWSROOM',
+    title: 'Newsroom',
     link: '/#projects',
   },
   {
-    title: 'CONTACT US',
+    title: 'Contact Us',
     link: '/sponsors',
   },
 ]
 
-function MobileNav({ isActive = false, onClick }) {
+function MobileNav({ isActive, onClick }) {
   return (
-    <BaseMobileNav transform={`translateX(${isActive ? '0' : '-100%'})`}>
+    <BaseMobileNav transform={`translateX(${isActive ? '100%' : '0'})`}>
       <VStack px="3rem" py="4.5rem" gap="1rem">
         {[...leftNavItems, ...rightNavItems].map(item => (
           <>

@@ -1,7 +1,7 @@
+import { CamelCasify, arrowify } from '../util'
 import styled, { css } from 'styled-components'
 
 import { CSSProperties } from 'react'
-import { arrowify } from '../util'
 
 const unchangedProps = [
   'position',
@@ -10,6 +10,7 @@ const unchangedProps = [
   'right',
   'bottom',
   'z-index',
+  'color',
 
   'padding',
   'margin',
@@ -23,6 +24,11 @@ const unchangedProps = [
   'border-left',
   'border-right',
   'border-bottom',
+
+  'border-top-width',
+  'border-left-width',
+  'border-right-width',
+  'border-bottom-width',
 
   'border-top-left-radius',
   'border-top-right-radius',
@@ -40,11 +46,12 @@ const unchangedProps = [
 
   'word-break',
   'font-size',
+  'font-weight',
   'display',
 ] as const
 
 type UnchangedBoxProps = {
-  [key in typeof unchangedProps[number]]?: any
+  [Prop in typeof unchangedProps[number]]?: CSSProperties[CamelCasify<Prop>]
 }
 
 // Need to add important since every other rule comes after box => has higher specificity
@@ -86,7 +93,6 @@ export interface BoxProps extends UnchangedBoxProps {
   bg?: string
   radius?: CSSProperties['borderRadius']
   fit?: CSSProperties['objectFit']
-  textAlign?: CSSProperties['textAlign']
 
   // All mobile props. See if this can be properly typechecked
   [key: `${typeof MOBILE_PREFIX}${string}`]: any
@@ -140,7 +146,7 @@ export const boxStyles = css<BoxProps>`
 `
 
 // Extend this for all components. Use `as` prop if another element is needed.
-// Allows us to quickly set CSS props like margin and padding.
+// Allows us to quickly set CSS props through React props.
 export const Box = styled.div<BoxProps>`
   ${boxStyles}
 `

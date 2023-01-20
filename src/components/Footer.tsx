@@ -22,7 +22,7 @@ const BaseFooter = styled(Box).attrs(props => ({
 
 export function Footer() {
   return (
-    <BaseFooter>
+    <BaseFooter mt="4rem">
       <ResponsiveRow px="min(10%, 16rem)" pb="4rem">
         <VStack
           gap="1rem"

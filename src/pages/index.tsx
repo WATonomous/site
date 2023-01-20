@@ -1,6 +1,7 @@
 import {
   Box,
   Container,
+  Cover,
   Image,
   Link,
   ResponsiveRow,
@@ -15,20 +16,7 @@ import bg from '../static/img/sae.jpg'
 import gear from '../static/img/gear.png'
 import logo from '../static/img/logos/wato.webp'
 import styled from 'styled-components'
-import waves from '../static/img/waves.svg'
-
-const Cover = styled.div`
-  position: absolute;
-  top: 1rem;
-  left: 2rem;
-  right: 2rem;
-  bottom: 1rem;
-
-  z-index: -1;
-
-  /* TODO change to a translucent image because filter's caniuse% is pretty bad */
-  /* filter: brightness(25%); */
-`
+import waves from '../static/img/shapes/waves.svg'
 
 function Gear({ isInteractive = false, isReversed = false, ...props }) {
   const animation =
@@ -131,7 +119,7 @@ export default function Home() {
             priority={true}
             width="960"
           />
-          <Box as="h2" mt="1rem" className="shadow">
+          <Box as="h2" mt="1rem">
             University of Waterloo's Autonomous Vehicle Department
           </Box>
           <ResponsiveRow mt="1rem" justify="flex-start">
@@ -201,7 +189,7 @@ export default function Home() {
         <VStack gap="4rem">
           <ResponsiveRow>
             <VStack mw="45%" mobile$max-width="100%" gap="1rem" align="start">
-              <Box as="h1">OUR MISSION</Box>
+              <Box as="h1">Our Mission</Box>
               <Box as="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -239,7 +227,7 @@ export default function Home() {
             />
             <Spacer minSize="1.5rem" />
             <VStack mw="50%" mobile$max-width="100%" gap="1rem" align="end">
-              <Box as="h1">PARTNERSHIPS</Box>
+              <Box as="h1">Partnerships</Box>
               <Box as="p" text-align="right">
                 Talk about merge between WATonomous and Watorace here (why we
                 are participating in the Indy Autonomous Challenge) and Mitt
@@ -280,7 +268,7 @@ export default function Home() {
         </>
 
         <VStack px="15%" gap="2rem">
-          <Box as="h1">UPCOMING EVENTS</Box>
+          <Box as="h1">Upcoming Events</Box>
           <EventCard title="5th Tech Talk" date="Wed Jan 5, 2022 @ 7:00 PM">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -330,7 +318,7 @@ export default function Home() {
 
         <Box py="8rem" px="10%">
           <VStack gap="1rem">
-            <Box as="h1">RESEARCH PROJECTS</Box>
+            <Box as="h1">Research Projects</Box>
             <Box as="h4" mw="60%" mobile$max-width="100%">
               We are currently in the process of developing multiple research
               projects. They are all ongoing and will be ready by early fall.

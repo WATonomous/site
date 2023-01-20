@@ -25,6 +25,10 @@ export const theme = {
     get semiBackground() {
       return transparentize(this.background, 0.5)
     },
+
+    get semiForeground() {
+      return transparentize(this.foreground, 0.5)
+    },
   },
 
   transitions: {

@@ -17,8 +17,8 @@ const variants = {
   button: css`
     padding: 0.75rem 1.5rem;
 
-    border: 1px solid currentColor;
-    border-radius: 1rem;
+    border: 2px solid currentColor;
+    border-radius: 0.75rem;
 
     will-change: color, background;
     &:hover {
@@ -39,7 +39,7 @@ const BaseLink = styled(Box).attrs(props => ({
   variant: 'subtle',
   ...props,
 }))<BaseLinkProps>`
-  /* color: ${props => props.theme.colors.foreground}; */
+  font-weight: 700;
   color: currentColor;
   background: none;
   cursor: pointer;
