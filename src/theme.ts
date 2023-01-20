@@ -14,6 +14,9 @@ export const theme = {
     blue100: 'rgb(67 131 255)',
     blue200: 'rgb(37 78 160)',
 
+    yellow: 'rgb(254 231 92)',
+    red: 'rgb(237 66 69)',
+
     get foreground() {
       return this.white100
     },

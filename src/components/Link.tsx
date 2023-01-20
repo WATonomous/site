@@ -10,8 +10,30 @@ import React from 'react'
 const variants = {
   subtle: css`
     will-change: color;
-    &:hover {
+    :hover {
       color: ${props => props.theme.colors.blue100};
+    }
+  `,
+  highlight: css`
+    ::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: ${props => props.theme.colors.blue200};
+      height: 0.5rem;
+      z-index: -1;
+      will-change: color;
+      transition: ${props => props.theme.transitions.fast};
+    }
+
+    z-index: 1;
+    :hover {
+      ::before {
+        height: 100%;
+      }
     }
   `,
   button: css`
@@ -21,7 +43,7 @@ const variants = {
     border-radius: 0.75rem;
 
     will-change: color, background;
-    &:hover {
+    :hover {
       color: ${props => props.theme.colors.background};
       background: ${props => props.theme.colors.foreground};
     }
@@ -39,6 +61,7 @@ const BaseLink = styled(Box).attrs(props => ({
   variant: 'subtle',
   ...props,
 }))<BaseLinkProps>`
+  position: relative;
   font-weight: 700;
   color: currentColor;
   background: none;

@@ -79,11 +79,11 @@ function MobileNav({ isActive, onClick }) {
     <BaseMobileNav transform={`translateX(${isActive ? '100%' : '0'})`}>
       <VStack px="3rem" py="4.5rem" gap="1rem">
         {[...leftNavItems, ...rightNavItems].map(item => (
-          <>
+          <React.Fragment key={item.title}>
             <Link font-size="2rem" href={item.link} onClick={onClick}>
               {item.title}
             </Link>
-          </>
+          </React.Fragment>
         ))}
       </VStack>
     </BaseMobileNav>

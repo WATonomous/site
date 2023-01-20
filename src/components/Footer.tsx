@@ -54,7 +54,7 @@ export function Footer() {
           <Link href="/team">Team Structure</Link>
           <Link href="/team">Role Details</Link>
           <Link href="/team">Resources</Link>
-          <Link href="/team">Apply</Link>
+          <Link href="/join">Apply</Link>
         </VStack>
         <Spacer />
         <VStack gap="0.25rem">

@@ -8,14 +8,14 @@ export interface StackProps {
 
 export const HStack = styled(Row)<StackProps>`
   > :not(:first-child) {
-    margin: 0;
+    // margin: 0;
     margin-left: ${props => props.gap};
   }
 `
 
 export const VStack = styled(Col)<StackProps>`
   > :not(:first-child) {
-    margin: 0;
+    // margin: 0;
     margin-top: ${props => props.gap};
   }
 `

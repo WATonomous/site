@@ -185,7 +185,7 @@ export default function Home() {
               Resources
             </Link>
             <Spacer mw="0.5rem" />
-            <Link href="#" variant="button">
+            <Link href="/join" variant="button">
               Apply Now!
             </Link>
           </ResponsiveRow>
