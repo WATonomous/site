@@ -75,7 +75,7 @@ function Project({ title, desc, link }) {
 }
 
 // Maybe split each section into a component
-export default function Home() {
+export default function HomePage() {
   const gear1 = useRef<HTMLElement | null>()
   const gear2 = useRef<HTMLElement | null>()
 
@@ -123,11 +123,11 @@ export default function Home() {
             University of Waterloo's Autonomous Vehicle Department
           </Box>
           <ResponsiveRow mt="1rem" justify="flex-start">
-            <Link href="#" variant="button">
+            <Link href="#about" variant="button">
               Learn More
             </Link>
             <Spacer mw="0.5rem" />
-            <Link href="#" variant="button">
+            <Link href="/sponsors" variant="button">
               Become a Sponsor
             </Link>
           </ResponsiveRow>

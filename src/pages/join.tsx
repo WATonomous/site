@@ -112,7 +112,7 @@ function Division({ name, children, ...props }) {
   )
 }
 
-export default function Home() {
+export default function JoinPage() {
   return (
     <>
       <Section id="hero" py="calc(2rem + 8vw)">
@@ -152,8 +152,11 @@ export default function Home() {
 
       <Section py="calc(2rem + 2vw)">
         <Container>
+          <Box as="h1" className="neon" mb="2rem" text-align="center">
+            Apply Now!
+          </Box>
           <Box
-            as="p"
+            as="h4"
             bg="blue200"
             border-top-left-radius="1rem"
             border-top-right-radius="1rem"

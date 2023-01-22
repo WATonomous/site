@@ -147,7 +147,7 @@ function SubtleBio({ name, position, ...props }) {
   )
 }
 
-export default function Home() {
+export default function TeamPage() {
   return (
     <>
       <Section id="hero" py="calc(2rem + 8vw)">

@@ -9,6 +9,7 @@ import { arrowify } from '../util'
 import { theme } from '../theme'
 
 // createGlobalStyle?
+// TODO move static to public/
 
 // Generate CSS variables from theme
 const variables = `

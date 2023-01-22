@@ -39,8 +39,9 @@ const variants = {
   button: css`
     padding: 0.75rem 1.5rem;
 
-    border: 2px solid currentColor;
+    border: 2px solid ${props => props.theme.colors.foreground};
     border-radius: 0.75rem;
+    background: transparent;
 
     will-change: color, background;
     :hover {

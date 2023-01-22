@@ -11,6 +11,9 @@ const unchangedProps = [
   'bottom',
   'z-index',
   'color',
+  'box-shadow',
+  'text-shadow',
+  'box-sizing',
 
   'padding',
   'margin',
@@ -99,29 +102,11 @@ export interface BoxProps extends UnchangedBoxProps {
 
   // All tablet props. See if this can be properly typechecked
   [key: `${typeof TABLET_PREFIX}${string}`]: any
+
+  $hover?: string
 }
 
 export const boxStyles = css<BoxProps>`
-  margin-top: ${props => props.mt || props.my};
-  margin-left: ${props => props.ml || props.mx};
-  margin-right: ${props => props.mr || props.mx};
-  margin-bottom: ${props => props.mb || props.my};
-
-  padding-top: ${props => props.pt || props.py};
-  padding-left: ${props => props.pl || props.px};
-  padding-right: ${props => props.pr || props.px};
-  padding-bottom: ${props => props.pb || props.py};
-
-  width: ${props => props.w};
-  height: ${props => props.h};
-  max-width: ${props => props.mw};
-  max-height: ${props => props.mh};
-
-  background: ${props =>
-    props.theme.colors[props.bg] ? `var(--${arrowify(props.bg)})` : props.bg};
-  border-radius: ${props => props.radius};
-  object-fit: ${props => props.fit};
-
   /* Unchanged props */
   ${props =>
     unchangedProps
@@ -142,6 +127,30 @@ export const boxStyles = css<BoxProps>`
       Object.entries(props)
         .filter(([prop, _]) => prop.startsWith(MOBILE_PREFIX))
         .map(buildMobileProp)}
+  }
+
+  margin-top: ${props => props.mt || props.my};
+  margin-left: ${props => props.ml || props.mx};
+  margin-right: ${props => props.mr || props.mx};
+  margin-bottom: ${props => props.mb || props.my};
+
+  padding-top: ${props => props.pt || props.py};
+  padding-left: ${props => props.pl || props.px};
+  padding-right: ${props => props.pr || props.px};
+  padding-bottom: ${props => props.pb || props.py};
+
+  width: ${props => props.w};
+  height: ${props => props.h};
+  max-width: ${props => props.mw};
+  max-height: ${props => props.mh};
+
+  background: ${props =>
+    props.theme.colors[props.bg] ? `var(--${arrowify(props.bg)})` : props.bg};
+  border-radius: ${props => props.radius};
+  object-fit: ${props => props.fit};
+
+  :hover {
+    ${props => props.$hover}
   }
 `
 
